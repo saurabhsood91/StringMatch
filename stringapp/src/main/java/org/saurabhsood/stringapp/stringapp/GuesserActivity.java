@@ -5,18 +5,23 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
+import android.widget.TextView;
 
 
-public class MainActivity extends ActionBarActivity {
+public class GuesserActivity extends ActionBarActivity {
 
-    //Create Extra Constant
-    public static final String STRING_MESSAGE = "org.saurabhsood.stringapplication.STRING_MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simple);
+        setContentView(R.layout.activity_guesser);
+
+        //Get Intent
+        Intent intent = getIntent();
+        //Get Message
+        String message = intent.getStringExtra(MainActivity.STRING_MESSAGE);
+        //Get Text View
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText(message);
     }
 
 
@@ -24,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.guesser, menu);
         return true;
     }
 
@@ -38,16 +43,6 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void sendMessage(View view) {
-        EditText editText = (EditText) findViewById(R.id.editText);
-        String message = editText.getText().toString();
-
-        //Create Intent
-        Intent intent = new Intent(this, GuesserActivity.class);
-        intent.putExtra(STRING_MESSAGE, message);
-        startActivity(intent);
     }
 
 }
