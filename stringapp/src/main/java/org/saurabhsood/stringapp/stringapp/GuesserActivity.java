@@ -68,7 +68,7 @@ public class GuesserActivity extends ActionBarActivity {
         EditText editText = (EditText)findViewById(R.id.guessedWord);
         String guessedWord = editText.getText().toString();
 
-        if(guessedWord.compareTo(this.stringToBeGuessed) != 0) {
+        if(guessedWord.compareTo(this.actualText) != 0) {
             this.numberOfTries++;
             if(this.numberOfTries == 3) {
                 Toast.makeText(this, "You Lost!!! Correct is " + this.actualText, 1000).show();
