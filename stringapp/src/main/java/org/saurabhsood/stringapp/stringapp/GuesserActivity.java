@@ -26,7 +26,7 @@ public class GuesserActivity extends ActionBarActivity {
         //Get Message
         this.actualText = intent.getStringExtra(MainActivity.STRING_MESSAGE);
         //Get Text View
-        this.stringToBeGuessed = this.morph(message);
+        this.stringToBeGuessed = this.morph(this.actualText);
         //Set Number of Tries to 0
         this.numberOfTries = 0;
         TextView textView = (TextView) findViewById(R.id.textView);
