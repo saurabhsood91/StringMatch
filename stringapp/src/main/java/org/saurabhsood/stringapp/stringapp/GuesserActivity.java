@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 public class GuesserActivity extends ActionBarActivity {
 
+    public String stringToBeGuessed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,10 +21,21 @@ public class GuesserActivity extends ActionBarActivity {
         //Get Message
         String message = intent.getStringExtra(MainActivity.STRING_MESSAGE);
         //Get Text View
+        this.stringToBeGuessed = this.morph(message);
         TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(message);
+        textView.setText(this.stringToBeGuessed);
     }
 
+    private String morph(String message) {
+        char a[] = message.toCharArray();
+        for(int i = 0; i < a.length / 2; i++) {
+            char temp = a[i];
+            a[i] = a[a.length - 1 - i];
+            a[a.length - 1 - i] = temp;
+        }
+        String str = new String(a);
+        return str;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
