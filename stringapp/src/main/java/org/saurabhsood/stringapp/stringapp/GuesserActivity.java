@@ -5,12 +5,17 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class GuesserActivity extends ActionBarActivity {
 
     public String stringToBeGuessed;
+    public String actualText;
+    public int numberOfTries;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,9 +24,11 @@ public class GuesserActivity extends ActionBarActivity {
         //Get Intent
         Intent intent = getIntent();
         //Get Message
-        String message = intent.getStringExtra(MainActivity.STRING_MESSAGE);
+        this.actualText = intent.getStringExtra(MainActivity.STRING_MESSAGE);
         //Get Text View
         this.stringToBeGuessed = this.morph(message);
+        //Set Number of Tries to 0
+        this.numberOfTries = 0;
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(this.stringToBeGuessed);
     }
@@ -55,6 +62,20 @@ public class GuesserActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void guessWord(View view) {
+        EditText editText = (EditText)findViewById(R.id.guessedWord);
+        String guessedWord = editText.getText().toString();
+
+        if(guessedWord.compareTo(this.stringToBeGuessed) != 0) {
+            this.numberOfTries++;
+            if(this.numberOfTries == 3) {
+                Toast.makeText(this, "You Lost!!! Correct is " + this.actualText, 1000).show();
+            }
+        } else {
+            Toast.makeText(this, "Correct Answer!!!" + this.stringToBeGuessed, 1000).show();
+        }
     }
 
 }
